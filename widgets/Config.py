@@ -48,7 +48,7 @@ class QConfigWidget(QWidget):
         parameter, and the right column is a QWidget that is its value.
 
         Args:
-            parent (QWidget): Required for all the behavior for QWidgets
+            parent (QWidget): Required for QWidget inheritance.
 
         Returns:
             None
