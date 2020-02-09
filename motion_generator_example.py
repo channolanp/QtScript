@@ -5,10 +5,21 @@ from PyQt5.QtCore import Qt
 import motion_generator_script
 
 if __name__ == '__main__':
+    #First start off by starting the QApplication for PyQt5
     app = QApplication(sys.argv)
-    window = QtScript(with_file = False)
-    window.SetScript(motion_profile_generator.generate)
 
+    '''
+    Use the QtScript class as the application window
+    There's a simple file selecting dialog widget that is added as the first
+    widget when with_file is True
+    '''
+    window = QtScript(with_file = False)
+
+    #Set the script that will trigger when "Run Script" is clicked.
+    #Note that this must have 1 arugment, as your config dict or throw away var
+    window.SetScript(motion_generator_script.generate)
+
+    #Here we build a bunch of UI elements and limit them however we like
     idle = QDoubleSpinBox()
     idle.setSingleStep(0.1)
     idle.setMinimum(0)
@@ -55,9 +66,11 @@ if __name__ == '__main__':
     noise.setValue(10)
 
     '''
-    The strings provided as names must match what you're calling in the script
+    Here we start adding the above widgets to the QtScript widget
+    Note that the first argument is the string name to be used for everything.
+    This name is used for all the JSON stuff, as well as the config dict that
+    is passed to your script
     '''
-
     window.AddWidget('Max Idle', idle)
     window.AddWidget('Target Velocity', vel)
     window.AddWidget('Target Acceleration', accel)
@@ -65,6 +78,9 @@ if __name__ == '__main__':
     window.AddWidget('Move Distance', distance)
     window.AddWidget('Sampling Frequency', frequency)
     window.AddWidget('Noise Amplitude', noise)
-    window.show()
 
+    '''
+    Show the widget, and lock us into the event loop
+    '''
+    window.show()
     app.exec_()
