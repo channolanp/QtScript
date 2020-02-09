@@ -1,2 +1,2 @@
 from . import widgets
-from . import ScriptGUI
+from . import QtScript

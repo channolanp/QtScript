@@ -1,5 +1,5 @@
 import sys
-from ScriptGUI import QtScript
+from QtScript import QtScript
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 
