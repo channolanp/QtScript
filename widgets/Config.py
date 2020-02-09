@@ -3,6 +3,12 @@ from PyQt5.QtCore import Qt
 import json
 
 class QConfigWidget(QWidget):
+    '''
+    Static dictionaries used for mapping behavior for polymorphic uses
+    of different UI elements. This makes it so we can reference these
+    dictionaries to call widget.getValue/getItem/getText, etc. and same for
+    setting.
+    '''
     get_mapping = {
         QLineEdit: QLineEdit.text,
         QSpinBox: QSpinBox.value,
@@ -13,7 +19,7 @@ class QConfigWidget(QWidget):
         QListWidget: QListWidget.currentItem
     }
     set_mapping = {
-        QLineEdit: QLineEdit.text,
+        QLineEdit: QLineEdit.setText,
         QSpinBox: QSpinBox.setValue,
         QDoubleSpinBox: QDoubleSpinBox.setValue,
         QCheckBox: QCheckBox.setChecked,
@@ -23,10 +29,6 @@ class QConfigWidget(QWidget):
     }
 
     def __init__(self, parent = None):
-        '''
-        This widget is used for the wobble script to change basic global variables
-        This widget also allows the saving and loading of the global variables as a JSON config
-        '''
         super().__init__(parent)
         self._config = {}
 
@@ -48,18 +50,29 @@ class QConfigWidget(QWidget):
         self._config[name] = control
 
     def GetConfig(self):
-        self.__update()
-        return self._config
+        config = {}
+        for key in self._config:
+            widget = self._config[key]
+            config[key] = self.get_mapping[type(widget)](widget)
+        return config
+
+    def SetConfig(self, config):
+        for key in config:
+            if key in self._config:
+                widget = self._config[key]
+                self.set_mapping[type(widget)](widget, config[key])
+            else:
+                print(f'Missing Key {key}, will not add')
+
     def _save(self):
         '''
         This method slots to the save button click signal to open a file dialog
         used to save self.__configurations into a JSON format
         '''
-        self.__update()
         filePath,_ = QFileDialog().getSaveFileName(self, 'Save File','','JSON config (*.json)')
         if filePath:
             with open(filePath, 'w') as f:
-                json.dump(self._config,f, indent=4)
+                json.dump(self.GetConfig(),f, indent=4)
 
     def _load(self):
         '''
@@ -72,5 +85,4 @@ class QConfigWidget(QWidget):
             config = None
             with open(filePath, 'r') as f:
                 config = json.load(f)
-            self._config = config
-            self.__setAll()
+            self.SetConfig(config)

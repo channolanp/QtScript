@@ -11,7 +11,11 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = QConfigWidget()
     sb = QSpinBox()
+    tb = QLineEdit()
+    cb = QCheckBox()
     window.AddWidget("A Spin Box",sb)
+    window.AddWidget("Some text box", tb)
+    window.AddWidget("A checkbox", cb)
 
     window.show()
 
