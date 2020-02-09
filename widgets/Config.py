@@ -42,16 +42,6 @@ class QConfigWidget(QWidget):
         #Set this widget's layout to the form
         self.setLayout(self._layout)
 
-        self.change_mapping = {
-            QLineEdit: self._handleTextChanged,
-            QSpinBox: self._handleValueChanged,
-            QDoubleSpinBox: self._handleValueChanged,
-            QCheckBox: self._handleStateChanged,
-            QComboBox: self._handleCurrentTextChanged,
-            QSlider: self._handleValueChanged,
-            QListWidget: self._handleCurrentItemChanged
-        }
-
     def AddWidget(self, name, control):
         label = QLabel(name)
         self._layout.addRow(label,control)
@@ -60,10 +50,6 @@ class QConfigWidget(QWidget):
     def GetConfig(self):
         self.__update()
         return self._config
-
-    def _update(self, object_name):
-        print("Item updated")
-
     def _save(self):
         '''
         This method slots to the save button click signal to open a file dialog
@@ -88,18 +74,3 @@ class QConfigWidget(QWidget):
                 config = json.load(f)
             self._config = config
             self.__setAll()
-
-    def _handleTextChanged(self, widget):
-        widget.textChanged.connect(self._update)
-
-    def _handleValueChanged(self, widget):
-        widget.valueChanged.connect(self._update)
-
-    def _handleStateChanged(self, widget):
-        widget.stateChanged.connect(self._update)
-
-    def _handleCurrentItemChanged(self, widget):
-        widget.currentItemChanged.connect(self._update)
-
-    def _handleCurrentTextChanged(self, widget):
-        widget.currentTextChanged.connect(self._update)
