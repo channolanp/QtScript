@@ -46,10 +46,20 @@ Coming soon. I honestly at this point have forgotten how to use the Python build
    7. Add these widgets to the QtScript object by using AddWidget(string('Label/Parameter name'), QWiget(object name))
    8. Show the widget and start the PyQt application
 
-## Example Images
+## Code Example
 ### Step 4
 ![](assets/markdown-img-paste-20200209212633439.png)
 ### Step 6.1 - 6.4
 ![](assets/markdown-img-paste-20200209220315887.png)
 ### Step 6.5-5.7
 ![](assets/markdown-img-paste-20200209215527780.png)
+
+## Example GUIs
+### Without File Selection
+![](assets/markdown-img-paste-20200209221440574.png)
+### With File Selection
+![](assets/markdown-img-paste-20200209221040534.png)
+### File Dialog
+![](assets/markdown-img-paste-20200209221229694.png)
+### Config Format
+![](assets/markdown-img-paste-2020020922140251.png)
