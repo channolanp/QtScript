@@ -63,3 +63,7 @@ Coming soon. I honestly at this point have forgotten how to use the Python build
 ![](assets/markdown-img-paste-20200209221229694.png)
 ### Config Format
 ![](assets/markdown-img-paste-2020020922140251.png)
+
+## Other References
+PyQt's gallary for common widgets:
+https://doc.qt.io/archives/qt-5.7/gallery.html
