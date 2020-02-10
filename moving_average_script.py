@@ -11,14 +11,17 @@ def main(config):
     Returns:
         None
     """
-    '''
-    Extract configurations, use these instead of something like...
-    file_path = myfile.csv
+
+    #Change the variables that should be global variables like the ones below
+    """
+    file_path = 'myfile.csv'
     window = 50
     with_debounce = true
     debounce_trigger = 1.0
     debounce_window = 10
-    '''
+    """
+    #To extract the data from the config.
+    #Note that the left hand side of the = is the same as above
     file_path = config['Target File']
     window = config['Filter Window']
     with_debounce = config['Debounce Signal']
