@@ -70,5 +70,5 @@ def generate(config):
     plt.show()
 
     with open('motion_example.csv', 'w') as f:
-        f.write('data\r\n')
-        f.writelines([str(point)+'\r\n' for point in output])
+        f.write('data\n')
+        f.writelines([str(point)+'\n' for point in output])
